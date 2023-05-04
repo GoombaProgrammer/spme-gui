@@ -35,6 +35,9 @@
             this.button1 = new System.Windows.Forms.Button();
             this.setInputFile = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -72,7 +75,7 @@
             // button1
             // 
             this.button1.Enabled = false;
-            this.button1.Location = new System.Drawing.Point(33, 215);
+            this.button1.Location = new System.Drawing.Point(36, 325);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(400, 43);
             this.button1.TabIndex = 4;
@@ -101,11 +104,40 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // textBox4
+            // 
+            this.textBox4.Location = new System.Drawing.Point(12, 283);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.Size = new System.Drawing.Size(471, 23);
+            this.textBox4.TabIndex = 8;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(12, 265);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(85, 15);
+            this.label4.TabIndex = 7;
+            this.label4.Text = "Conlang name";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label5.Location = new System.Drawing.Point(122, 224);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(243, 25);
+            this.label5.TabIndex = 11;
+            this.label5.Text = "Options For Relex Conlangs";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(486, 270);
+            this.ClientSize = new System.Drawing.Size(486, 380);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.textBox4);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.setInputFile);
             this.Controls.Add(this.button1);
@@ -130,5 +162,8 @@
         private Button button1;
         private Button setInputFile;
         private Button button2;
+        private TextBox textBox4;
+        private Label label4;
+        private Label label5;
     }
 }

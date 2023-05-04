@@ -10,6 +10,16 @@ namespace spme_gui
         string outputModel = "";
         string outputModel2 = "";
 
+        string RandomString(int len)
+        {
+            Random r = new Random();
+            string s = "";
+            for (int i = 0; i < len; i++)
+            {
+                s += (char)r.Next(0x20, 0x7F);
+            }
+            return s;
+        }
         public Form1()
         {
             InitializeComponent();
@@ -123,7 +133,40 @@ namespace spme_gui
                 }
                 Directory.Delete(dir);
             }
-            byte[] sentencePieceModel = System.IO.File.ReadAllBytes(tempDir + "\\sentencepiece.model");
+            if (textBox4.Text != "")
+            {
+                string[] iso = { "en", "de", "es", "fr", "it", "ja", "ko", "pt", "ru", "zh", "nl" };
+                // Change language name
+                string file1 = File.ReadAllText(tempDir + "\\stanza\\resources.json");
+                string file2 = File.ReadAllText(tempDir + "\\metadata.json");
+                string file4 = File.ReadAllText(tempDir2 + "\\metadata.json");
+                string newIso = RandomString(2);
+                while (iso.Contains(newIso))
+                {
+                    newIso = RandomString(2);
+                }
+                file1 = file1.Replace(" \"no\": {\r\n    \"alias\": \"nb\"\r\n  },", " \r\n  \"" + newIso + "\": {\r\n    \"alias\": \"en\"\r\n  },");
+                file2 = @"{
+    ""package_version"": ""1.5"",
+    ""argos_version"": ""1.5"",
+    ""from_code"": ""en"",
+    ""from_name"": ""English"",
+    ""to_code"": """ + newIso + @""",
+""to_name"": """ + textBox4.Text + @"""
+}";
+                file4 = @"{
+""package_version"": ""1.5"",
+""argos_version"": ""1.5"",
+""from_code"": """ + newIso + @""",
+""from_name"": """ + textBox4.Text + @""",
+""to_code"": ""en"",
+""to_name"": ""English""
+}";
+                File.WriteAllText(tempDir + "\\stanza\\resources.json", file1);
+                File.WriteAllText(tempDir + "\\metadata.json", file2);
+                File.WriteAllText(tempDir2 + "\\metadata.json", file4);
+            }
+            byte[] sentencePieceModel = File.ReadAllBytes(tempDir + "\\sentencepiece.model");
             string find;
             string change;
             find = textBox1.Text;
