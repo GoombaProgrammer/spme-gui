@@ -10,3 +10,8 @@ Well, maybe you want to fix a typo that appears 100000 times in the dataset it g
 I fully found out how the SentencePiece and OpenNMT checkpoints work myself, how? well I just looked at the binary data, and I tried modifying some parts.
 
 Note that this is not gauranteed to work.
+
+# Features
+- Can make words longer
+- Can make words shorter
+- Can change the sentencepiece.model file
