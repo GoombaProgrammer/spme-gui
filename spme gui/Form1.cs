@@ -16,7 +16,7 @@ namespace spme_gui
             string s = "";
             for (int i = 0; i < len; i++)
             {
-                s += (char)r.Next(0x20, 0x7F);
+                s += (char)r.Next(97, 123);
             }
             return s;
         }
@@ -139,13 +139,14 @@ namespace spme_gui
                 // Change language name
                 string file1 = File.ReadAllText(tempDir + "\\stanza\\resources.json");
                 string file2 = File.ReadAllText(tempDir + "\\metadata.json");
+                string file3 = File.ReadAllText(tempDir2 + "\\stanza\\resources.json");
                 string file4 = File.ReadAllText(tempDir2 + "\\metadata.json");
                 string newIso = RandomString(2);
                 while (iso.Contains(newIso))
                 {
                     newIso = RandomString(2);
                 }
-                file1 = file1.Replace(" \"no\": {\r\n    \"alias\": \"nb\"\r\n  },", " \r\n  \"" + newIso + "\": {\r\n    \"alias\": \"en\"\r\n  },");
+                file1 = file1.Replace(" \"no\": {\n    \"alias\": \"nb\"\n  },", " \n  \"" + newIso + "\": {\n    \"alias\": \"en\"\n  },");
                 file2 = @"{
     ""package_version"": ""1.5"",
     ""argos_version"": ""1.5"",
@@ -154,6 +155,14 @@ namespace spme_gui
     ""to_code"": """ + newIso + @""",
 ""to_name"": """ + textBox4.Text + @"""
 }";
+                // Get the first folder name
+                string fl = "";
+                foreach (string dir in Directory.GetDirectories(tempDir2 + "\\stanza"))
+                {
+                    fl = Path.GetFileName(dir);
+                    break;
+                }
+                file3 = file3.Replace(" \"no\": {\n    \"alias\": \"nb\"\n  },", " \n  \"" + newIso + "\": {\n    \"alias\": \"" + fl + "\"\n  },");
                 file4 = @"{
 ""package_version"": ""1.5"",
 ""argos_version"": ""1.5"",
@@ -164,6 +173,7 @@ namespace spme_gui
 }";
                 File.WriteAllText(tempDir + "\\stanza\\resources.json", file1);
                 File.WriteAllText(tempDir + "\\metadata.json", file2);
+                File.WriteAllText(tempDir2 + "\\stanza\\resources.json", file3);
                 File.WriteAllText(tempDir2 + "\\metadata.json", file4);
             }
             byte[] sentencePieceModel = File.ReadAllBytes(tempDir + "\\sentencepiece.model");
